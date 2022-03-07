@@ -1,9 +1,10 @@
+from flask import render_template
 from app.auth import auth
 
 @auth.route('/login')
 def login():
-    return '<h1>login</h1>'
+    return render_template('login.html', text='Testing')
 
 @auth.route('/signup')
 def signup():
-    return '<h1>sign up</h1>'
+    return render_template('sign_up.html', text='Testing')
