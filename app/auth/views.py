@@ -68,3 +68,12 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('view.home'))
+
+@auth.route('/profile')
+@login_required
+def profile():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+
+    return render_template('profile.html', user=current_user)

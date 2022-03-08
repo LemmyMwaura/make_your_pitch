@@ -34,6 +34,15 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'User {self.username}'
 
+class Category(db.Model):
+    __tablename__='categories'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    post_id = db.relationship('Posts', backref='category', lazy='dynamic')
+
+    def __init__(self, name):
+        self.name = name
+
 class Posts(db.Model):
     __tablename__='posts'
     id = db.Column(db.Integer, primary_key=True)
@@ -41,6 +50,8 @@ class Posts(db.Model):
     content = db.Column(db.Text)
     date_posted = db.Column(db.DateTime(timezone=True), default=func.now())
     poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     
-    def __repr__(self):
-        return f'User {self.name}'
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
