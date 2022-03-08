@@ -9,9 +9,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        password = request.form.get('email')
+        password = request.form.get('password')
 
-        if user := User.query.filter_by(email=email).first():
+        if user:= User.query.filter_by(email=email).first():
             if check_password_hash(user.password, password):
                 flash("Logged in!", category='success')
                 login_user(user, remember=True)
@@ -21,7 +21,7 @@ def login():
         else:
             flash('Email does not exist', category='error')
 
-    return render_template('login.html', text='Testing')
+    return render_template('login.html', text='Testing', user=current_user)
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def signup():
@@ -61,10 +61,10 @@ def signup():
             login_user(new_user, remember=True)
             return redirect(url_for('view.home'))
 
-    return render_template('sign_up.html', message='You have already submitted feedback')
+    return render_template('sign_up.html', message='You have already submitted feedback', user=current_user)
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('view.home'))
