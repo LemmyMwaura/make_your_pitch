@@ -23,3 +23,10 @@ main{
     max-width: 60vw;
 }
 
+.spacer{
+    aspect-ratio: 960/300;   
+}
+
+.layer1{
+    background-image: url('./wave1_lemmy.svg');
+}

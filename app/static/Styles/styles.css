@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500&display=swap');
 
+::root{
+    --main_color: #002233;
+}
+
 *,::after,::before{
     margin: 0;
     padding: 0;
@@ -16,21 +20,34 @@ li{
 
 body{
     font-family: 'Fredoka', sans-serif;
-    /* background: #8d49f7 linear-gradient(95.14deg, #8d49f7 0%, #6b53ff 103.53%); */
 }
 
 nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4rem;
     background: hsl(0 0% 100% / 0.1);
+    height: 5rem;
+    background-image: url("./wave2_lemmy.svg");
+}
+
+.nav-logo, .nav-items{
+    margin-top: -1.3rem;
+}
+
+.spacer{
+    aspect-ratio: 960/70;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .nav-items{
     display: flex;
     align-items: center;
 }
+
 .nav-item{
     padding: 0.2rem 0.8rem;
 }
@@ -38,4 +55,3 @@ nav{
 .nav-link{
     color: black;
 }
-
