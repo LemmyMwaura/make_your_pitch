@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
-{% block link %}
-
-{% endblock %}
+{% block link %}{% endblock %}
 
 {% block content %}
-
+    <form action="" method="POST">
+        <h3>LOGIN</h3>
+        <div class="form-group">
+            <label for="email"></label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="Enter Email">
+            <label for="username"></label>
+            <input class="form-control" type="text" id="username" name="username" placeholder="Enter Username">
+            <label for="password"></label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="Enter Password">
+        </div>
+        <input type="submit" class="btn submit-btn" value="Login">
+    </form>
 {% endblock %}

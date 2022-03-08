@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block link %}
-
+<link rel="stylesheet" href="{{ url_for('static', filename='Styles/home.css')}}">
 {% endblock %}
 
 {% block content %}
-
+    <main>
+        <div class="container home">
+            <h1 class="home-title">Stunning Ideas Made together</h1>
+            <p class="home-desc">Share your best thinking</p>
+            <img class='home-img' src="../static/Images/about-hero.jpg" alt="Image">
+        </div>   
+    </main>
+    <h1>HOME</h1>
 {% endblock %}

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> MakeYourPitch by LemmyMwaura </title>
     <!-- <link rel='icon' href='{{url_for('static', filename='images/logo.png')}}'> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Styles/styles.css')}}">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     {% block link %}{% endblock %}
 </head>
@@ -14,17 +14,30 @@
     <header>
         <nav>
             <div class="nav-logo">
-                <a href="/home" class="nav-link">HOME</a>
+                <a href="{{url_for('view.home')}}" class="nav-link">Pitches App</a>
             </div>
             <ul class="nav-items">
-                <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a href="#" class="nav-link">Profile</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav-items">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{{url_for('auth.logout')}}" class="nav-link">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a href="{{url_for('auth.login')}}" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="{{url_for('auth.signup')}}" class="nav-link">Sign-up</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     {% block content %}
     {% endblock %}
 </body>
