@@ -1,0 +1,25 @@
+main{
+    padding-top: 4.5rem;
+}
+
+.container{
+    display: grid;
+    place-items: center;
+}
+
+.home-title{
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.home-desc{
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.home-img{
+    max-width: 60vw;
+}
+
