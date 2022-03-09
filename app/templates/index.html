@@ -9,11 +9,19 @@
         <div class="container home">
             <h1 class="home-title">Stunning Ideas Made together</h1>
             <p class="home-desc">Share your best thinking</p>
-            <img class='home-img' src="../static/Images/about-hero.jpg" alt="Image">
+            <img class='home-img' src="../static/Images/home.jpg" alt="Image">
         </div>   
     </main>
-    <div class="spacer layer1"></div>
-    <section class="categories">
-        
+    <div class="spacer layer1">
+    </div>
+    <section class="categories-wrapper">
+        <h1>Categories</h1>
+        <div class="categories">
+            {% for category in categories %}
+            <div class="cat-obj">    
+                <h1 class="cat-title">{{ category.name }}</h1>
+            </div>
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}

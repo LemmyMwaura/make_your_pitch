@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block content %}
-
+<form action="" method="POST">
+    <h3>PITCH</h3>
+    <div class="form-group">
+        <label for="title"></label>
+        <input class="form-control" type="text" id="title" name="title" placeholder="Title">
+        <label for="content"></label>
+        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Lets hear your Pitch"></textarea>  
+    </div>
+    <input type="submit" class="btn submit-btn" value="Post">
+</form>
 {% endblock %}
