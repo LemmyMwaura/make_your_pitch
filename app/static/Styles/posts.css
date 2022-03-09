@@ -1,0 +1,10 @@
+.posts{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+}
+
+.post-wrapper{
+    background-color: brown;
+}

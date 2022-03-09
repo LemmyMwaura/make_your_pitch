@@ -1,18 +1,39 @@
 {% extends 'base.html' %}
 
 {% block link %}
-
+<link rel="stylesheet" href="{{ url_for('static', filename='Styles/profile.css')}}">
 {% endblock %}
 
 {% block content %}
-<form action="" method="POST">
-    <h3>PITCH</h3>
-    <div class="form-group">
-        <label for="title"></label>
-        <input class="form-control" type="text" id="title" name="title" placeholder="Title">
-        <label for="content"></label>
-        <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Lets hear your Pitch"></textarea>  
-    </div>
-    <input type="submit" class="btn submit-btn" value="Post">
-</form>
+<div class="container">
+    <form action="" method="POST">
+        <h3>PITCH</h3>
+        <div class="form-wrapper">
+            <div class="form-group">
+                <label for="title"></label>
+                <input class="form-control" type="text" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="radios form-group">
+                <label for="cat1">Buiness/Ecommerce</label>
+                <input type="radio" name="category"  value="Buiness/Ecommerce" id="cat1">
+                <label for="cat2">Tech</label>
+                <input type="radio" name="category" value="Tech" id="cat1">
+                <label for="cat3">Games</label>
+                <input type="radio" name="category" value="Games" id="cat1">
+                <label for="cat4">Fashion</label>
+                <input type="radio" name="category" value="Fashion" id="cat1">
+                <label for="cat5">Science</label>
+                <input type="radio" name="category" value="Science" id="cat1">
+                <label for="cat4">Crypto/Web3</label>
+                <input type="radio" name="category" value="Crypto/Web3" id="cat1">
+            </div>
+
+            <div class="form-group">
+                <label for="content"></label>
+                <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Lets hear your Pitch"></textarea>  
+            </div>
+        </div>
+        <input type="submit" class="btn submit-btn" value="Post">
+    </form>
+</div>
 {% endblock %}
