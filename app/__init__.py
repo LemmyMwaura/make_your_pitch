@@ -16,7 +16,7 @@ def create_app():
     from .auth import auth
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(view, url_prefix='/')
-    app.register_blueprint(cat, url_prefix='/category')
+    app.register_blueprint(cat, url_prefix='/posts/category')
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'

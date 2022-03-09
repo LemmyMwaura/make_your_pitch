@@ -2,7 +2,6 @@ from app import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
-
 class Role(db.Model):
     __tablename__='roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +22,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     posts = db.relationship('Posts', backref='poster', lazy='dynamic')
+    comments = db.relationship('Comment', backref='commenter', lazy='dynamic')
 
     def __init__(self, firstname, lastname, email, username, password):
         self.firstname = firstname
@@ -51,9 +51,18 @@ class Posts(db.Model):
     date_posted = db.Column(db.DateTime(timezone=True), default=func.now())
     poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    comments = db.relationship('Comment', backref='post_comment', lazy='dynamic')
     
     def __init__(self, title, content, category_id, poster_id):
         self.title = title
         self.content = content
         self.category_id = category_id
         self.poster_id = poster_id
+
+class Comment(db.Model):
+    __tablename__='comments'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(255), nullable=False)
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))

@@ -14,9 +14,14 @@
                 <h2 class="post-author">{{ post.poster.username }}</h2>
                 <h2 class="post-email">{{ post.poster.email }}</h2>
                 <div class="post-footer">
-                <p class="post-category">{{post.category.name}}</p>
-                <p class="post-date_posted">{{post.date_posted}}</p>
-            </div>
+                    <p class="post-category">{{post.category.name}}</p>
+                    <p class="post-date_posted">{{post.date_posted}}</p>
+                </div>
+                {% if user.id == post.poster_id %}
+                <div class="post-btn">
+                    <a class="btn" href="{{ url_for('view.delete_post',id=post.id) }}">Delete</a>
+                </div>
+                {% endif %}
             </div>
             {% endfor%}
         </div>
