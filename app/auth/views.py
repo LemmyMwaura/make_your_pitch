@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for,request,flash
 from app.auth import auth
 from app import db
-from app.models import User
+from app.models import Posts, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -69,11 +69,31 @@ def logout():
     logout_user()
     return redirect(url_for('view.home'))
 
-@auth.route('/profile')
+@auth.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
     if request.method == 'POST':
         title = request.form.get('title')
         content = request.form.get('content')
+        category_picked = request.form.get('category')
+        poster_id = current_user.id
+
+        if category_picked == 'cat1':
+            category_id = 1
+        elif category_picked == 'cat2':
+            category_id = 2
+        elif category_picked == 'cat3':
+            category_id = 3
+        elif category_picked == 'cat4':
+            category_id = 4
+        elif category_picked == 'cat5':
+            category_id = 5
+        elif category_picked == 'cat6':
+            category_id = 6
+
+        new_post = Posts(title, content, category_id, poster_id)
+        print(category_picked, category_id)
+        db.session.add(new_post)
+        db.session.commit(new_post)
 
     return render_template('profile.html', user=current_user)

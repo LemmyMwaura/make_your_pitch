@@ -52,6 +52,8 @@ class Posts(db.Model):
     poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     
-    def __init__(self, title, content):
+    def __init__(self, title, content, category_id, poster_id):
         self.title = title
         self.content = content
+        self.category_id = category_id
+        self.poster_id = poster_id
