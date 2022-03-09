@@ -12,10 +12,11 @@ DB_PASS='adminlemmy'
 def create_app():
     app = Flask(__name__)
 
-    from .views import view
+    from .views import view, cat
     from .auth import auth
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(view, url_prefix='/')
+    app.register_blueprint(cat, url_prefix='/category')
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'

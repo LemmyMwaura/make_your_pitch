@@ -78,22 +78,23 @@ def profile():
         category_picked = request.form.get('category')
         poster_id = current_user.id
 
-        if category_picked == 'cat1':
+        if category_picked == 'Buiness/Ecommerce':
             category_id = 1
-        elif category_picked == 'cat2':
+        elif category_picked == 'Tech':
             category_id = 2
-        elif category_picked == 'cat3':
+        elif category_picked == 'Games':
             category_id = 3
-        elif category_picked == 'cat4':
+        elif category_picked == 'Fashion':
             category_id = 4
-        elif category_picked == 'cat5':
+        elif category_picked == 'Science':
             category_id = 5
-        elif category_picked == 'cat6':
+        elif category_picked == 'Crypto/Web3':
             category_id = 6
 
         new_post = Posts(title, content, category_id, poster_id)
-        print(category_picked, category_id)
+        print(category_picked, category_id, poster_id)
         db.session.add(new_post)
-        db.session.commit(new_post)
+        db.session.commit()
+        flash('Post created')
 
     return render_template('profile.html', user=current_user)
