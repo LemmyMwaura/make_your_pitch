@@ -19,6 +19,8 @@
                 </div>
                 {% if user.id == post.poster_id %}
                 <div class="post-btn">
+                    <span id="likes-count-{{post.id}}"> {{ post.likes.all()|length }}</span>
+                    <i class='bx bx-like' id="like-button-{{post.id}}" onClick="like('{{post.id}}')"></i>
                     <a class="btn" href="{{ url_for('post.delete_post',post_id=post.id) }}">Delete</a>
                 </div>
                 {% endif %}

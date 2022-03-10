@@ -1,6 +1,6 @@
 from app import db
-from app.models import Category, Posts, Comment
-from flask import redirect, render_template, Blueprint, flash, request, url_for
+from app.models import Category, Posts, Comment, Like
+from flask import redirect, render_template, Blueprint, flash, request, url_for, jsonify
 from flask_login import current_user,login_required
 
 view = Blueprint('view',__name__)
@@ -66,13 +66,31 @@ def delete_comment(comment_id):
     comment = Comment.query.filter_by(id=comment_id).first()
     if not comment:
         flash('Comment does not exist', category='error')
-    elif current_user.id != comment.poster_id and current_user.id != comment.posts.poster_id:
+    elif current_user.id != comment.poster_id and current_user.id != comment.post.poster_id:
         flash('You do not have permission to delete this comment', category='error')
     else:
         db.session.delete(comment)
         db.session.commit()
 
     return redirect(url_for('post.posts'))
+
+@post.route('/like-post/<post_id>', methods=['GET','POST'])
+@login_required
+def like(post_id):
+    post = Posts.query.filter_by(id=post_id).first()
+    like = Like.query.filter_by(author=current_user.id, post_id=post_id).first()
+
+    if not post:
+        return jsonify({'error': 'Post does not exist'}, 400)
+    elif like:
+        db.session.delete(like)
+        db.session.commit()
+    else:
+        like = Like(author=current_user.id, post_id=post_id)
+        db.session.add(like)
+        db.session.commit()
+
+    return jsonify({'likes':len(post.likes.all()), 'liked':current_user.id in map(lambda x:x.author, post.likes)})
 
 @cat.route('/Business')
 def bsns():

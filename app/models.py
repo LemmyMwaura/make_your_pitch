@@ -21,8 +21,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    posts = db.relationship('Posts', backref='poster', lazy='dynamic')
-    comments = db.relationship('Comment', backref='commenter', lazy='dynamic')
+    posts = db.relationship('Posts', backref='poster', lazy='dynamic', passive_deletes=True)
+    comments = db.relationship('Comment', backref='commenter', lazy='dynamic', passive_deletes=True)
+    likes = db.relationship('Like', backref='liker', lazy='dynamic', passive_deletes=True)
 
     def __init__(self, firstname, lastname, email, username, password):
         self.firstname = firstname
@@ -49,9 +50,10 @@ class Posts(db.Model):
     title = db.Column(db.String(255))
     content = db.Column(db.Text)
     date_posted = db.Column(db.DateTime(timezone=True), default=func.now())
-    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    comments = db.relationship('Comment', backref='posts', lazy='dynamic')
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='CASCADE'))
+    comments = db.relationship('Comment', backref='post', lazy='dynamic', passive_deletes=True)
+    likes = db.relationship('Like', backref='post', lazy='dynamic', passive_deletes=True)
     
     def __init__(self, title, content, category_id, poster_id):
         self.title = title
@@ -64,5 +66,12 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
-    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete='CASCADE'))
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
+
+class Like(db.Model):
+    __tablename__='likes'
+    id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete='CASCADE'))
+    author = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'))
