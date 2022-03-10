@@ -51,7 +51,7 @@ class Posts(db.Model):
     date_posted = db.Column(db.DateTime(timezone=True), default=func.now())
     poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    comments = db.relationship('Comment', backref='post_comment', lazy='dynamic')
+    comments = db.relationship('Comment', backref='posts', lazy='dynamic')
     
     def __init__(self, title, content, category_id, poster_id):
         self.title = title

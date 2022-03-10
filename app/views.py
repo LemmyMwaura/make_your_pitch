@@ -1,17 +1,18 @@
 from app import db
-from app.models import Category, Posts
-from flask import render_template, Blueprint, flash
+from app.models import Category, Posts, Comment
+from flask import redirect, render_template, Blueprint, flash, request, url_for
 from flask_login import current_user,login_required
 
 view = Blueprint('view',__name__)
 cat = Blueprint('cat',__name__)
+post = Blueprint('post',__name__)
 
 @view.route('/')
 @view.route('/home')
 def home():
     categories = ['Buiness/Ecommerce','Tech','Games','Fashion','Science','Crypto/Web3']
     for category in categories:
-        if cate_exists := Category.query.filter_by(name=category).first():
+        if _ := Category.query.filter_by(name=category).first():
             print('Already exists')
         else:
             new_category = Category(category)
@@ -21,18 +22,18 @@ def home():
     all_categories = Category.query.order_by(Category.id)
     return render_template('index.html', user=current_user, categories=all_categories)
 
-@view.route('/posts')
+@post.route('/')
 def posts():
     all_posts = Posts.query.order_by(Posts.date_posted)
     return render_template('posts.html', user=current_user, posts=all_posts)
 
-@view.route('/posts/delete/<int:id>')
+@post.route('/delete/<int:post_id>')
 @login_required
-def delete_post(id):
-    post_to_delete = Posts.query.get_or_404(id)
+def delete_post(post_id):
+    post_to_delete = Posts.query.get_or_404(post_id)
     try:
         if current_user.id != post_to_delete.id:
-            flash('You do not have permission to delete this post.(Not the author)')
+            flash('You do not have permission to delete this post.(Not the author)', category='danger')
         else:
             db.session.delete(post_to_delete)
             db.session.commit()
@@ -42,6 +43,36 @@ def delete_post(id):
 
     all_posts = Posts.query.order_by(Posts.date_posted)
     return render_template('posts.html', user=current_user, posts=all_posts)
+
+@post.route('/create-comment/<post_id>', methods=['GET', 'POST'])
+@login_required
+def create_comment(post_id):
+    if text := request.form.get('text'):
+        if _ := Posts.query.filter_by(id=post_id):
+            comment = Comment(text=text, post_id=post_id, poster_id=current_user.id)
+            print(comment.text)
+            db.session.add(comment)
+            db.session.commit()
+        else:
+            flash('Post does not exist', category='error')
+    else:
+        flash('Comment cannot be empty.', category='error')  
+
+    return redirect(url_for('post.posts'))
+
+@post.route('/delete_comment/<int:comment_id>')
+@login_required
+def delete_comment(comment_id):
+    comment = Comment.query.filter_by(id=comment_id).first()
+    if not comment:
+        flash('Comment does not exist', category='error')
+    elif current_user.id != comment.poster_id and current_user.id != comment.posts.poster_id:
+        flash('You do not have permission to delete this comment', category='error')
+    else:
+        db.session.delete(comment)
+        db.session.commit()
+
+    return redirect(url_for('post.posts'))
 
 @cat.route('/Business')
 def bsns():

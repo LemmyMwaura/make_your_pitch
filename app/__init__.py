@@ -12,10 +12,11 @@ DB_PASS='adminlemmy'
 def create_app():
     app = Flask(__name__)
 
-    from .views import view, cat
+    from .views import view, cat, post
     from .auth import auth
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(view, url_prefix='/')
+    app.register_blueprint(post, url_prefix='/posts')
     app.register_blueprint(cat, url_prefix='/posts/category')
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')

@@ -19,9 +19,23 @@
                 </div>
                 {% if user.id == post.poster_id %}
                 <div class="post-btn">
-                    <a class="btn" href="{{ url_for('view.delete_post',id=post.id) }}">Delete</a>
+                    <a class="btn" href="{{ url_for('post.delete_post',post_id=post.id) }}">Delete</a>
                 </div>
                 {% endif %}
+                {% for comment in post.comments %}
+                <div class="post-edit-comments">
+                    <p class="post-comment">{{ comment.text }}</p>
+                    {% if user.id == comment.poster_id or user.id == post.poster_id %}
+                    <div class="post-btn">
+                        <a class="btn" href="{{ url_for('post.delete_comment',comment_id=comment.id) }}">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <form action="/posts/create-comment/{{ post.id }}" method="POST" class="form-comment">
+                    <input type="text" id="text" name="text" class="form-control" placeholder="add a comment">
+                    <input type="submit" class="submit-btn" value="Add comment">
+                </form>
             </div>
             {% endfor%}
         </div>

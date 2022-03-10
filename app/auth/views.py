@@ -92,7 +92,6 @@ def profile():
             category_id = 6
 
         new_post = Posts(title, content, category_id, poster_id)
-        print(category_picked, category_id, poster_id)
         db.session.add(new_post)
         db.session.commit()
         flash('Post created')
