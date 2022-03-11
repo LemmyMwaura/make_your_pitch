@@ -8,6 +8,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 DB_USER='postgres'
 DB_PASS='adminlemmy'
+ENV='Prod'
 
 def create_app():
     app = Flask(__name__)
@@ -19,10 +20,14 @@ def create_app():
     app.register_blueprint(post, url_prefix='/posts')
     app.register_blueprint(cat, url_prefix='/posts/category')
 
+    if ENV =='dev':
+        app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = ''
+
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    
+
     db.init_app(app)
     migrate.init_app(app,db)
     create_database(app)
