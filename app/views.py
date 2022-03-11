@@ -32,7 +32,7 @@ def posts():
 def delete_post(post_id):
     post_to_delete = Posts.query.get_or_404(post_id)
     try:
-        if current_user.id != post_to_delete.id:
+        if current_user.id != post_to_delete.poster.id:
             flash('You do not have permission to delete this post.(Not the author)', category='danger')
         else:
             db.session.delete(post_to_delete)
@@ -95,30 +95,30 @@ def like(post_id):
 @cat.route('/Business')
 def bsns():
     bsns_posts = Posts.query.filter_by(category_id=1)
-    return render_template('category.html', user=current_user, posts=bsns_posts)
+    return render_template('posts.html', user=current_user, posts=bsns_posts)
 
 @cat.route('/Technology')
 def tech():
     tech_posts = Posts.query.filter_by(category_id=2)
-    return render_template('category.html', user=current_user, posts=tech_posts)
+    return render_template('posts.html', user=current_user, posts=tech_posts)
 
 @cat.route('/Gaming')
 def games():
     games_posts = Posts.query.filter_by(category_id=3)
-    return render_template('category.html', user=current_user, posts=games_posts)
+    return render_template('posts.html', user=current_user, posts=games_posts)
 
 @cat.route('/Fashion')
 def fashion():
     fashion_posts = Posts.query.filter_by(category_id=4)
-    return render_template('category.html', user=current_user, posts=fashion_posts)
+    return render_template('posts.html', user=current_user, posts=fashion_posts)
 
 @cat.route('/Science')
 def science():
     science_posts = Posts.query.filter_by(category_id=5)
-    return render_template('category.html', user=current_user, posts=science_posts)
+    return render_template('posts.html', user=current_user, posts=science_posts)
 
 @cat.route('/Crypto-web3')
 def crypto():
     web3_posts = Posts.query.filter_by(category_id=6)
-    return render_template('category.html', user=current_user, posts=web3_posts)
+    return render_template('posts.html', user=current_user, posts=web3_posts)
 

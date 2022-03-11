@@ -95,5 +95,5 @@ def profile():
         db.session.add(new_post)
         db.session.commit()
         flash('Post created')
-
-    return render_template('profile.html', user=current_user)
+    user_posts = Posts.query.filter_by(poster_id=current_user.id)
+    return render_template('profile.html', user=current_user, posts=user_posts)
