@@ -8,7 +8,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 DB_USER='postgres'
 DB_PASS='adminlemmy'
-ENV='prod'
+ENV='Prod'
 
 def create_database(app):
     with app.app_context():
@@ -26,6 +26,7 @@ def create_app():
 
     if ENV =='dev':
         app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
+        create_database(app)
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
@@ -34,7 +35,6 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app,db)
-    create_database(app)
 
     from .models import User
     login_manager = LoginManager()

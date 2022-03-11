@@ -1,6 +1,6 @@
 # Make_your_pitch
 
-TheDailyNews. A  simple flask app that allows you to pitch ideas. Performs User Authentication and also Connects to a database
+Make_Your_Pitch. A  simple flask app that allows you to pitch ideas. Performs User Authentication and also Connects to a database
 ## Table of contents
   <!-- - [Screenshot](#screenshot) -->
   - [Project Image](#Screenshot)
@@ -13,7 +13,7 @@ TheDailyNews. A  simple flask app that allows you to pitch ideas. Performs User 
 ___
 
 ### Screenshot
-![Website](/app_news/static/images/web.png)
+![Website](/app/static/images/web.png)
 ___
 ---
 ### Project Description
@@ -25,13 +25,13 @@ ___
 
 ### BDD
  #### Context
-   Given User logs into the app
+   Given the User logs into the app
  #### Event
   When the User tries to access his/her account, log out from his/her account, make and edit posts...
 #### Outcomes
   Then the user should be opted to signup or login.\
-  The user should also be able to post new Pitches and  upvote existing pitches.
-  The user should also be able to delete their existing Pitches, their comments and comments on their posts.
+  The user should also be able to post new Pitches and  upvote existing pitches.\
+  The user should also be able to delete their existing Pitches, their comments and comments on their posts.\
   The user should also be able to logout.
 
 * [x] The user can create an account and login.
