@@ -8,7 +8,11 @@ db = SQLAlchemy()
 migrate = Migrate()
 DB_USER='postgres'
 DB_PASS='adminlemmy'
-ENV='Prod'
+ENV='prod'
+
+def create_database(app):
+    with app.app_context():
+        db.create_all()
 
 def create_app():
     app = Flask(__name__)
@@ -43,9 +47,6 @@ def create_app():
 
     return app
 
-def create_database(app):
-    with app.app_context():
-        db.create_all()
 
 from app import views
 from app import errors

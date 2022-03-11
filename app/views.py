@@ -12,9 +12,7 @@ post = Blueprint('post',__name__)
 def home():
     categories = ['Buiness/Ecommerce','Tech','Games','Fashion','Science','Crypto/Web3']
     for category in categories:
-        if _ := Category.query.filter_by(name=category).first():
-            print('Already exists')
-        else:
+        if not (_ := Category.query.filter_by(name=category).first()):
             new_category = Category(category)
             db.session.add(new_category)
             db.session.commit()
