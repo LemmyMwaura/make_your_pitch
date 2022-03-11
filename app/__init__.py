@@ -8,7 +8,11 @@ db = SQLAlchemy()
 migrate = Migrate()
 DB_USER='postgres'
 DB_PASS='adminlemmy'
-ENV='dev'
+ENV='Prod'
+
+def create_database(app):
+    with app.app_context():
+        db.create_all()
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +26,7 @@ def create_app():
 
     if ENV =='dev':
         app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
+        create_database(app)
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
