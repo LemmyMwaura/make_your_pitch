@@ -23,7 +23,7 @@ def create_app():
     if ENV =='dev':
         app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
     else:
-        app.config['SQLALCHEMY_DATABASE_URI'] = ''
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
