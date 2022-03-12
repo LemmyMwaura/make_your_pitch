@@ -110,15 +110,6 @@ nav{
     padding-left: 0.4rem;
 }
 
-.signup{
-    border: 2px solid hsl(219, 15%, 95%);
-    border-bottom: 5px solid hsl(219, 15%, 95%);
-    background-color: hsl(250, 66%, 75%);
-    color: hsl(219, 48%, 8%);
-    padding: 0.2rem 0.3rem;
-    border-radius: 0.2rem;
-}
-
 .nav-link{
     text-transform: uppercase;
 }
@@ -155,6 +146,16 @@ nav{
     color:hsl(219, 15%, 95%);
     font-weight: 500;
     transition: .4s;
+}
+
+.signup{
+    border: 2px solid hsl(219, 15%, 95%);
+    border-bottom: 5px solid hsl(219, 15%, 95%);
+    background-color: hsl(250, 66%, 75%);
+    color : hsl(219, 48%, 8%);
+    font-weight: 600;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.2rem;
 }
 
 .nav-logo > a:hover,
