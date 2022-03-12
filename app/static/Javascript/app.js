@@ -21,6 +21,22 @@ function scrollHeader() {
 
 window.addEventListener("scroll", scrollHeader)
 
+// modal
+const modalBtns = document.querySelectorAll('.modal-btn')
+modalBtns.forEach((btn) => {
+  console.log(btn)
+  btn.addEventListener('click', () => {
+    closeFlashMessage(btn)
+  })
+})
+
+function closeFlashMessage(btn){
+  let modal = btn.closest('.modal')
+  console.log(modal)
+  modal.classList.add('inactive')
+}
+
+// Like fn
 function like(postId) {
   const likesCount = document.getElementById(`likes-count-${postId}`)
   const likesButton = document.getElementById(`like-button-${postId}`)

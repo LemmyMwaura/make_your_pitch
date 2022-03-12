@@ -49,7 +49,17 @@
     {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
     {% for category, message in messages %}
-    {{ message }}
+    {% if category == 'error' %}
+    <div class="flash-message modal danger">
+        {{ message }}
+    <button class="btn modal-btn"> &times; </button>
+    </div>
+    {% else %}
+    <div class="flash-message modal success" data>
+        {{ message }}
+    <button class="btn modal-btn">&times;</button>
+    </div>
+    {% endif %}
     {% endfor %}
     {% endif %}
     {% endwith %}
