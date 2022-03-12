@@ -13,7 +13,7 @@ Make_Your_Pitch. A  simple flask app that allows you to pitch ideas. Performs Us
 ___
 
 ### Screenshot
-![Website](/app/static/images/web.png)
+![Website](/app/static/Images/web.png)
 ___
 ---
 ### Project Description
