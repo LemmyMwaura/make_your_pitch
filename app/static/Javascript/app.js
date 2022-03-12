@@ -13,6 +13,14 @@ document.addEventListener('click', (e) => {
     })
 })
 
+function scrollHeader() {
+  const nav = document.getElementById("nav")
+  if (this.scrollY >= 150) nav.classList.add("scroll-header")
+  else nav.classList.remove("scroll-header")
+}
+
+window.addEventListener("scroll", scrollHeader)
+
 function like(postId) {
   const likesCount = document.getElementById(`likes-count-${postId}`)
   const likesButton = document.getElementById(`like-button-${postId}`)

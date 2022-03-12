@@ -41,11 +41,11 @@ form{
     flex-direction: column;
 }
 
-input[type='text'],
+.profile-title,
 textarea{
     background: none;
     border: 2px solid hsl(219, 15%, 95%);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     outline: none;
     padding: 0.4rem 0.5rem;
     color: hsl(219, 15%, 95%);
@@ -73,7 +73,7 @@ input[type='radio']{
     font-size: 1rem;
     border: 3px solid hsl(219, 15%, 95%);
     padding: 0 0.5rem;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     gap: 5px;
     text-align: center;
     cursor: pointer;

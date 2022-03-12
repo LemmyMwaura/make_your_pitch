@@ -22,8 +22,9 @@ def home():
 
 @post.route('/')
 def posts():
+    title='All Posts'
     all_posts = Posts.query.order_by(Posts.date_posted)
-    return render_template('posts.html', user=current_user, posts=all_posts)
+    return render_template('posts.html', user=current_user, posts=all_posts, title=title)
 
 @post.route('/delete/<int:post_id>')
 @login_required
@@ -39,8 +40,9 @@ def delete_post(post_id):
     except:
         flash('Woops there was a problem deleting post. Try again', category='danger')
 
+    title='All Posts'
     all_posts = Posts.query.order_by(Posts.date_posted)
-    return render_template('posts.html', user=current_user, posts=all_posts)
+    return render_template('posts.html', user=current_user, posts=all_posts, title=title)
 
 @post.route('/create-comment/<post_id>', methods=['GET', 'POST'])
 @login_required
@@ -92,31 +94,37 @@ def like(post_id):
 
 @cat.route('/Business')
 def bsns():
+    title='Business'
     bsns_posts = Posts.query.filter_by(category_id=1)
-    return render_template('posts.html', user=current_user, posts=bsns_posts)
+    return render_template('posts.html', user=current_user, posts=bsns_posts, title=title)
 
 @cat.route('/Technology')
 def tech():
+    title='Technology'
     tech_posts = Posts.query.filter_by(category_id=2)
-    return render_template('posts.html', user=current_user, posts=tech_posts)
+    return render_template('posts.html', user=current_user, posts=tech_posts, title=title)
 
 @cat.route('/Gaming')
 def games():
+    title='Gaming'
     games_posts = Posts.query.filter_by(category_id=3)
-    return render_template('posts.html', user=current_user, posts=games_posts)
+    return render_template('posts.html', user=current_user, posts=games_posts, title=title)
 
 @cat.route('/Fashion')
 def fashion():
+    title='Fashion'
     fashion_posts = Posts.query.filter_by(category_id=4)
-    return render_template('posts.html', user=current_user, posts=fashion_posts)
+    return render_template('posts.html', user=current_user, posts=fashion_posts, title=title)
 
 @cat.route('/Science')
 def science():
+    title='Science'
     science_posts = Posts.query.filter_by(category_id=5)
-    return render_template('posts.html', user=current_user, posts=science_posts)
+    return render_template('posts.html', user=current_user, posts=science_posts, title=title)
 
 @cat.route('/Crypto-web3')
 def crypto():
+    title='Crypto/Web-3'
     web3_posts = Posts.query.filter_by(category_id=6)
-    return render_template('posts.html', user=current_user, posts=web3_posts)
+    return render_template('posts.html', user=current_user, posts=web3_posts, title=title)
 

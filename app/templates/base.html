@@ -16,27 +16,32 @@
     <header>
         <nav class="spacer" id="nav">
             <div class="nav-logo">
-                <a href="{{url_for('view.home')}}" class="nav-link">Pitches App</a>
+                <a href="{{url_for('view.home')}}" class="nav-link main-logo">
+                    <div class="main-tooltip">
+                        <i class='bx bxs-pen'></i>
+                    </div>Pitches App
+                </a>
                 <a href="{{url_for('post.posts')}}" class="nav-link">All Pitches</a>
                 <div class="dropdown" data-dropdown>
                     <a href="#" class="nav-link dropdown-btn" data-dropdown-button>Categories</a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu drop-menu-styles">
                         <a class="nav-link drop-item" href="{{url_for('cat.bsns')}}">Business</a>
                         <a class="nav-link drop-item" href="{{url_for('cat.tech')}}">Technology</a>
                         <a class="nav-link drop-item" href="{{url_for('cat.games')}}">Games</a>
                         <a class="nav-link drop-item" href="{{url_for('cat.fashion')}}">Fashion</a>
                         <a class="nav-link drop-item" href="{{url_for('cat.science')}}">Science</a>
-                        <a class="nav-link drop-item" href="{{url_for('cat.crypto')}}">Crypto/Web-3</a>
+                        <a class="nav-link drop-item" href="{{url_for('cat.crypto')}}">Crypto/Web3</a>
                     </div>
                 </div>
             </div>
             <ul class="nav-items">
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{{url_for('auth.profile')}}" class="nav-link">{{user.username}}</a></li>
+                <li class="nav-item"><a href="{{url_for('auth.profile')}}" class="nav-link user-nav">
+                    <i class='bx bx-user'></i> {{user.username}}</a></li>
                 <li class="nav-item"><a href="{{url_for('auth.logout')}}" class="nav-link">Logout</a></li>
                 {% else %}
                 <li class="nav-item"><a href="{{url_for('auth.login')}}" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="{{url_for('auth.signup')}}" class="nav-link">Sign-up</a></li>
+                <li class="nav-item"><a href="{{url_for('auth.signup')}}" class="nav-link signup">Sign-up</a></li>
                 {% endif %}
             </ul>
         </nav>

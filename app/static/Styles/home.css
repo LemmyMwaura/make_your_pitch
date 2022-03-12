@@ -8,7 +8,7 @@ main{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
-    width: 80%;
+    width: 100%;
     height: calc(100vh - 4.5rem);
 }
 
@@ -18,10 +18,14 @@ main{
     font-weight: bold;
 }
 
-.home-desc1,
-.home-desc2{
+.home-title.large{
+    font-size: 3.2rem;
+}
+
+.home-desc{
     font-size: 1.5rem;
     font-weight: bold;
+    padding: 0;
 }
 
 .home-img{
