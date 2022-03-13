@@ -46,7 +46,16 @@
         <div class="container posts">
             {% for post in posts %}
             <div class="post-wrapper">
-                <h1 class="post-title">{{post.title}}</h1>
+                <div class="post-header">
+                    <h1 class="post-title">{{post.title}}</h1>
+                    <div class="post-btn">
+                        <span class="post-btn-item" id="likes-count-{{post.id}}"> {{ post.likes.all()|length }}</span>
+                        {% if user.id == post.poster_id %}
+                        <i class='bx bx-like post-btn-item' id="like-button-{{post.id}}" onClick="like('{{post.id}}')"></i>
+                        <a class="delete-btn-atag" href="{{ url_for('post.delete_post',post_id=post.id) }}"><i class='bx bx-trash post-btn-item'></i></a>
+                        {% endif %}
+                    </div>
+                </div>
                 <div class="post-content">{{post.content}}</div>
                 <div class="post-name-wrapper">
                     <i class='bx bxs-badge-check post-tooltip'></i>
@@ -59,13 +68,6 @@
                         <p class="post-date_posted">{{post.date_posted.strftime('%b %dth, %Y') }}</p>
                     </div>
                 </div>
-                {% if user.id == post.poster_id %}
-                <div class="post-btn">
-                    <span class="post-btn-item" id="likes-count-{{post.id}}"> {{ post.likes.all()|length }}</span>
-                    <i class='bx bx-like post-btn-item' id="like-button-{{post.id}}" onClick="like('{{post.id}}')"></i>
-                    <a class="delete-btn-atag" href="{{ url_for('post.delete_post',post_id=post.id) }}"><i class='bx bx-trash post-btn-item'></i></a>
-                </div>
-                {% endif %}
                 <div class="dropdown dropdown-comments" data-dropdown>
                     <a href="#" class="dropdown-comment-btn dropdown-btn" data-dropdown-button>view comments</a>
                     <div class="post-edit-comments dropdown-menu">
