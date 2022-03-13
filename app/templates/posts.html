@@ -14,8 +14,8 @@
                     <h1 class="post-title">{{post.title}}</h1>
                     <div class="post-btn">
                         <span class="post-btn-item" id="likes-count-{{post.id}}"> {{ post.likes.all()|length }}</span>
-                        {% if user.id == post.poster_id %}
                         <i class='bx bx-like post-btn-item' id="like-button-{{post.id}}" onClick="like('{{post.id}}')"></i>
+                        {% if user.id == post.poster_id %}
                         <a class="delete-btn-atag" href="{{ url_for('post.delete_post',post_id=post.id) }}"><i class='bx bx-trash post-btn-item'></i></a>
                         {% endif %}
                     </div>
