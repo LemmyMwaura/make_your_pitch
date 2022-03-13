@@ -21,7 +21,9 @@ main > h1{
 .post-wrapper{
     background-color:hsl(219, 32%, 12%);
     padding: 2rem;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .post-title{
