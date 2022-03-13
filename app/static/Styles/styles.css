@@ -264,6 +264,23 @@ nav{
     font-weight: bold;
 }
 
+.error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.error > h1{
+    font-size: 6rem;
+}
+
+.error > h3{
+    font-size: 3rem;
+}
+
 /* chrome + safari custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

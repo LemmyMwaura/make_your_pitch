@@ -36,14 +36,17 @@ main > h1{
     font-size: 1.2rem;
 }
 
+.post-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .post-btn{
     display: flex;
     align-items: center;
     justify-content: space-around;
     column-gap: 0.5rem;
-    position:absolute;
-    top: 2rem;
-    right: 1.5rem;
 }
 
 .delete-btn-atag{

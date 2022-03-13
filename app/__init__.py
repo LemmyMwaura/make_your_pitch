@@ -2,23 +2,26 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from app.errors import not_found
 import os
 
 db = SQLAlchemy()
 migrate = Migrate()
 DB_USER='postgres'
 DB_PASS='adminlemmy'
-ENV='Prod'
+ENV='dev'
 
 def create_app():
     app = Flask(__name__)
 
     from .views import view, cat, post
     from .auth import auth
+
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(view, url_prefix='/')
     app.register_blueprint(post, url_prefix='/posts')
     app.register_blueprint(cat, url_prefix='/posts/category')
+    app.register_error_handler(404, not_found)
 
     if ENV =='dev':
         app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@localhost/pitchesapp'
