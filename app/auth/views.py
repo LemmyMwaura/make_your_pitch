@@ -1,7 +1,10 @@
 from flask import render_template,redirect,url_for,request,flash
 from app.auth import auth
+from sqlalchemy import desc
 from app import db
+from app.mailapp import mail_message
 from app.models import Posts, User
+from app.mailapp import mail_message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -57,7 +60,12 @@ def signup():
             )
             db.session.add(new_user)
             db.session.commit()
-            flash('User created')
+            mail_message('Welcome to Blogs App',
+                                'email/welcome',
+                                new_user.email, 
+                                user=new_user
+            )
+            flash(f'Hi {username}, Your Account was created', category='success')
             login_user(new_user, remember=True)
             return redirect(url_for('view.home'))
 
@@ -96,4 +104,5 @@ def profile():
         db.session.commit()
         flash('Post created')
     user_posts = Posts.query.filter_by(poster_id=current_user.id)
+    user_posts = user_posts.order_by(desc(Posts.date_posted))
     return render_template('profile.html', user=current_user, posts=user_posts)
